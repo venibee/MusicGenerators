@@ -7,20 +7,13 @@ import javax.sound.midi.*;
 import static javax.sound.midi.ShortMessage.*;
 
 public class PeacePiece {
-	private ArrayList<Integer> listOfNotes=new ArrayList<Integer>(); 
-	int[] notes ={0,67,0,74,0,79,0,84,83,81,76,69,62,64,60,55};
+	private ArrayList<Integer> listOfNotes=new ArrayList<Integer>(); // holding the actually available notes for the randomized melody
+	int[] notes ={0,67,0,74,0,79,0,84,83,81,76,69,62,64,60,55}; //all possible notes for the melody ( will be fed to the ArrayList gradually)
 	private Sequencer sequencer;
 	private Sequence sequence;
 	private Track track;
 	private int numOfBars=16;
 	private int barCount;
-	
-//	private void fillArraList() {	
-//			for(int a:notes) {
-//				listOfNotes.add(a);
-//			}
-//		
-//	}
 	
 	private void setUpMidi() {
 		try {
@@ -31,8 +24,7 @@ public class PeacePiece {
 			sequencer.setTempoInBPM(50);
 		}catch(Exception e) {
 			e.printStackTrace();
-		}
-	
+		}	
 	}
 	
 	private void buildTrackAndStart() {
@@ -53,6 +45,7 @@ public class PeacePiece {
 			e.printStackTrace();
 		}
 	}
+	
 	private void buildBass() {
 		int[][]bassNotes = {{31},{24},{48,52},{43,45,48,53}};
 			for(int i=0;i<4;i++) {
@@ -60,8 +53,7 @@ public class PeacePiece {
 					track.add(makeEvent(NOTE_ON,1,bassNotes[i][j],80,8*barCount+i*2));
 					track.add(makeEvent(NOTE_OFF,1,bassNotes[i][j],80,8*barCount+i*2+2));
 				}
-			}
-		
+			}		
 	}
 	
 	private void makeBar() {
